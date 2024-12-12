@@ -1,4 +1,4 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/exceptions/failures.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/exceptions/failures.dart';
 
 class TFormatException extends Failure {
   TFormatException(String message) : super('format_exception', message);

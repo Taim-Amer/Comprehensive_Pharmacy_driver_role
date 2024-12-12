@@ -1,13 +1,13 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/dependencies/forget_password_binding.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/dependencies/otp_binding.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/dependencies/signin_binding.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/dependencies/signup_binding.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/features/authentication/views/forget_password/new_password_screen.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/features/authentication/views/forget_password/phone_verify_screen.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/features/authentication/views/forget_password/verify_code_screen.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/features/authentication/views/signin/signin_screen.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/features/authentication/views/signup/otp_screen.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/features/authentication/views/signup/signup_screen.dart';
+import 'package:comprehensive_pharmacy_driver_role/dependencies/forget_password_binding.dart';
+import 'package:comprehensive_pharmacy_driver_role/dependencies/otp_binding.dart';
+import 'package:comprehensive_pharmacy_driver_role/dependencies/signin_binding.dart';
+import 'package:comprehensive_pharmacy_driver_role/dependencies/signup_binding.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/forget_password/new_password_screen.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/forget_password/phone_verify_screen.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/forget_password/verify_code_screen.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signin/signin_screen.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signup/otp_screen.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signup/signup_screen.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {

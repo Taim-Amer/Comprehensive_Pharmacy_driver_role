@@ -1,5 +1,5 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/helpers/exports.dart';
+import 'package:comprehensive_pharmacy_driver_role/common/widgets/custom_shapes/containers/rounded_container.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/helpers/exports.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

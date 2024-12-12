@@ -1,4 +1,4 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/exceptions/failures.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/exceptions/failures.dart';
 
 class TPlatformException extends Failure {
   TPlatformException(String code) : super(code, _getMessage(code));

@@ -1,4 +1,4 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/helpers/exports.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/helpers/exports.dart';
 import 'package:flutter/material.dart';
 
 class TRoundedContainer extends StatelessWidget {

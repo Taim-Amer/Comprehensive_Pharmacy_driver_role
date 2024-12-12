@@ -1,7 +1,7 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/features/authentication/views/signin/widgets/phone_country_code.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/constants/colors.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/constants/sizes.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/constants/text_strings.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signin/widgets/phone_country_code.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/constants/colors.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';

@@ -1,5 +1,5 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/common/styles/spacing_styles.dart';
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/constants/sizes.dart';
+import 'package:comprehensive_pharmacy_driver_role/common/styles/spacing_styles.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';

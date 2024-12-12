@@ -1,4 +1,4 @@
-import 'package:comprehensive_pharmacy_pharmacy_role/utils/constants/sizes.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
