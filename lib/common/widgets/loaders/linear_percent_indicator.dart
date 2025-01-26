@@ -1,9 +1,14 @@
+// import 'package:comprehensive_pharmacy_driver_role/common/widgets/loaders/loading_widget.dart';
+// import 'package:comprehensive_pharmacy_driver_role/features/orders/controllers/orders_controller.dart';
 // import 'package:comprehensive_pharmacy_driver_role/utils/constants/colors.dart';
+// import 'package:comprehensive_pharmacy_driver_role/utils/constants/enums.dart';
 // import 'package:comprehensive_pharmacy_driver_role/utils/constants/image_strings.dart';
+// import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 // import 'package:comprehensive_pharmacy_driver_role/utils/helpers/helper_functions.dart';
 // import 'package:comprehensive_pharmacy_driver_role/utils/services/file_services.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:get/get.dart';
 // import 'package:percent_indicator/percent_indicator.dart';
 //
 // class TLinearPercentIndicator extends StatefulWidget {
@@ -46,6 +51,9 @@
 //       progressColor: TColors.primary,
 //     ) : GestureDetector(
 //         onTap: () => TFileServices.deleteFileByName(widget.fileName),
-//         child: SvgPicture.asset(TImages.trash));
+//         child: Obx(() => OrdersController.instance.createOrderApiStatus.value == RequestState.loading ? const Padding(
+//           padding: EdgeInsets.all(TSizes.sm),
+//           child: LoadingWidget(),
+//         ) :SvgPicture.asset(TImages.trash)));
 //   }
 // }

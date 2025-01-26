@@ -11,8 +11,7 @@ class SignupRepoImpl implements SignupRepo {
 
   @override
   Future<SignupModel> signup({
-    required String name,
-    required String pharmacyName,
+    required String driverName,
     required String email,
     required String phone,
     required String password,
@@ -23,8 +22,7 @@ class SignupRepoImpl implements SignupRepo {
   }) {
     final dioHelper = TDioHelper();
     return dioHelper.post(TApiConstants.register, {
-      'name' : name,
-      'pharmacy_name' : pharmacyName,
+      'name' : driverName,
       'phone' : phone,
       'email' : email,
       'password' : password,

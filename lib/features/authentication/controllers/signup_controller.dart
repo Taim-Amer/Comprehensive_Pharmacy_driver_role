@@ -16,8 +16,7 @@ class SignupController extends GetxController{
 
   Rx<RequestState> signupApiStatus = RequestState.begin.obs;
 
-  final pharmacistNameController = TextEditingController();
-  final pharmacyNameController = TextEditingController();
+  final driverNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final passwordController = TextEditingController();
@@ -32,8 +31,7 @@ class SignupController extends GetxController{
       return;
     }
     await SignupRepoImpl.instance.signup(
-      name: pharmacistNameController.text,
-      pharmacyName: pharmacyNameController.text,
+      driverName: driverNameController.text,
       email: emailController.text.trim(),
       phone: phoneController.text.trim(),
       password: passwordController.text.trim(),

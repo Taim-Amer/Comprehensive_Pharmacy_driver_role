@@ -21,23 +21,12 @@ class SignupForm extends StatelessWidget {
       child: Column(
         children: [
           TextFormField(
-            controller: SignupController.instance.pharmacistNameController,
-            validator: (value) => TValidator.validateEmptyText(" ${TEnglishTexts.pharmacistName}", value),
+            controller: SignupController.instance.driverNameController,
+            validator: (value) => TValidator.validateEmptyText(" ${TEnglishTexts.driverName}", value),
             enableInteractiveSelection: false,
             cursorColor: TColors.primary,
             decoration: InputDecoration(
-                hintText: TEnglishTexts.pharmacistName,
-                prefixIcon: const Icon(Iconsax.user),
-            ),
-          ),
-          TSizes.spaceBtwInputField.verticalSpace,
-          TextFormField(
-            controller: SignupController.instance.pharmacyNameController,
-            validator: (value) => TValidator.validateEmptyText(" ${TEnglishTexts.pharmacyName}", value),
-            enableInteractiveSelection: false,
-            cursorColor: TColors.primary,
-            decoration: InputDecoration(
-              hintText: TEnglishTexts.pharmacyName,
+              hintText: TEnglishTexts.driverName,
               prefixIcon: const Icon(Iconsax.user),
             ),
           ),

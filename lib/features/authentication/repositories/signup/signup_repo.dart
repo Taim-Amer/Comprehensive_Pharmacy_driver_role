@@ -4,8 +4,7 @@ import 'package:comprehensive_pharmacy_driver_role/features/authentication/model
 
 abstract class SignupRepo {
   Future<SignupModel> signup({
-    required String name,
-    required String pharmacyName,
+    required String driverName,
     required String email,
     required String phone,
     required String password,
