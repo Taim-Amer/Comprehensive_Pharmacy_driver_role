@@ -1,6 +1,6 @@
+import 'package:comprehensive_pharmacy_driver_role/utils/constants/enums.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/logging/logger.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -24,23 +24,23 @@ class THelperFunctions {
     );
   }
 
-  static viewNotification(RemoteMessage message) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (message.notification != null) {
-      Get.snackbar(
-        message.notification!.title ?? "No Title",
-        message.notification!.body ?? "No Body",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black.withOpacity(0.8),
-        colorText: Colors.white,
-        borderRadius: 10,
-        margin: const EdgeInsets.all(10),
-        duration: const Duration(seconds: 3),
-      );
-    } else {
-      TLoggerHelper.info('No notification data in message');
-    }
-  }
+  // static viewNotification(RemoteMessage message) async {
+  //   await Future.delayed(const Duration(milliseconds: 500));
+  //   if (message.notification != null) {
+  //     Get.snackbar(
+  //       message.notification!.title ?? "No Title",
+  //       message.notification!.body ?? "No Body",
+  //       snackPosition: SnackPosition.BOTTOM,
+  //       backgroundColor: Colors.black.withOpacity(0.8),
+  //       colorText: Colors.white,
+  //       borderRadius: 10,
+  //       margin: const EdgeInsets.all(10),
+  //       duration: const Duration(seconds: 3),
+  //     );
+  //   } else {
+  //     TLoggerHelper.info('No notification data in message');
+  //   }
+  // }
 
   static void showAlert(String title, String message) {
     showDialog(
@@ -94,6 +94,10 @@ class THelperFunctions {
 
   static List<T> removeDuplicates<T>(List<T> list){
     return list.toSet().toList();
+  }
+
+  static void updateApiStatus({required Rx<RequestState> target, required RequestState value}){
+    target.value = value;
   }
 
   static List<Widget> wrapWidgets(List<Widget> widgets, int rowSize){

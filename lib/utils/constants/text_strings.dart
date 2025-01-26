@@ -26,6 +26,7 @@ class TArabicTexts {
   static String get emailAddress => '';
   static String get password => '';
   static String get confirmPassword => '';
+  static String get addressEnter => '';
   static String get location => '';
   static String get signinQuastion => '';
   static String get otpTitle => '';
@@ -42,6 +43,8 @@ class TArabicTexts {
   static String get updatePassword => '';
   static String get resetSuccess => '';
   static String get resetSuccessSubTitle => '';
+  static String get pharmacistName => '';
+  static String get pharmacyName => '';
 
   // Orders
   static String get myOrders => '';
@@ -57,8 +60,9 @@ class TArabicTexts {
   static String get pending => '';
   static String get canceled => '';
   static String get rejected => '';
+  static String get processing => "";
+  static String get onTheWay => "";
   static String get orderID => '';
-  static String get pharmacyName => '';
   static String get orderDate => '';
   static String get orderDetails => '';
   static String get prescriptionPhoto => '';
@@ -95,6 +99,7 @@ class TArabicTexts {
   static String get searchingTitle => '';
   static String get searchingSubTitle => '';
   static String get cancelOrder => '';
+  static String get totalCost => '';
 
   // settings
   static String get dataEdit => '';
@@ -171,6 +176,7 @@ class TEnglishTexts {
   static String get emailAddress => 'Email address';
   static String get password => 'Password';
   static String get confirmPassword => 'Confirm password';
+  static String get addressEnter => 'Enter Your Address';
   static String get location => 'Location';
   static String get signinQuastion => 'Already have an account?';
   static String get otpTitle => 'Verification code';
@@ -187,6 +193,8 @@ class TEnglishTexts {
   static String get updatePassword => 'Update password';
   static String get resetSuccess => 'Password reset successful!';
   static String get resetSuccessSubTitle => 'Your new password is ready to use. Log in and regain access to your account seamlessly!';
+  static String get pharmacistName => 'Pharmacist name';
+  static String get pharmacyName => 'Pharmacy Name';
 
   // Orders
   static String get myOrders => 'My orders';
@@ -202,9 +210,11 @@ class TEnglishTexts {
   static String get pending => 'Pending';
   static String get canceled => 'Canceled';
   static String get rejected => 'Rejected';
+  static String get processing => "Processing";
+  static String get onTheWay => "On the way";
   static String get orderID => 'Order ID : #2345213';
-  static String get pharmacyName => 'Pharmacy name';
   static String get orderDate => 'Order date';
+  static String get finalPrice => 'Final price';
   static String get orderDetails => 'Order Details';
   static String get prescriptionPhoto => 'Prescription photo';
   static String get readyToReceiveTitle => 'Ready to receive orders';
@@ -215,7 +225,7 @@ class TEnglishTexts {
   static String get finishedOrders => 'Finished orders';
   static String get viewOrders => 'View order';
   static String get customerName => 'Customer name';
-  static String get orderNo => 'Order No: # 34566';
+  static String get orderNo => 'Order No:';
   static String get newOrdersEmptyTitle => 'There are no new orders currently';
   static String get newOrdersEmptySubTitle => 'Make sure you are available to be able to receive requests';
   static String get currentOrdersEmptySubTitle => 'All orders that are still in progress appear here';
@@ -224,6 +234,8 @@ class TEnglishTexts {
   static String get rejectedOrdersEmptySubTitle => 'Any request that is rejected by you will appear here';
   static String get finishedOrdersEmptySubTitle => 'All orders completed by the customer will appear here';
   static String get finishedOrdersEmptyTitle => 'There are no completed orders';
+  static String get onTheWayOrdersEmptySubTitle => 'All orders on the way will appear here';
+  static String get onTheWayOrdersEmptyTitle => 'There are no on the way orders';
   static String get noteFromCustomer => 'Note from the customer';
   static String get locationCustomer => 'Customer location';
   static String get confirmOrder => 'Confirm order';
@@ -240,6 +252,7 @@ class TEnglishTexts {
   static String get searchingTitle => 'Your order is waiting to be accepted...';
   static String get searchingSubTitle => 'Sometimes it will take time so please be patient';
   static String get cancelOrder => 'Cancel order';
+  static String get totalCost => 'Total cost';
 
   // settings
   static String get dataEdit => 'Edit your personal information and location';

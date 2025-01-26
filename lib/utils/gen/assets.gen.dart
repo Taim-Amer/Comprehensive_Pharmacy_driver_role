@@ -56,6 +56,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/Group 39446.svg
   String get group39446 => 'assets/images/Group 39446.svg';
 
+  /// File path: assets/images/NoConnection.svg
+  String get noConnection => 'assets/images/NoConnection.svg';
+
   /// File path: assets/images/Rectangle 5.svg
   String get rectangle5 => 'assets/images/Rectangle 5.svg';
 
@@ -83,6 +86,7 @@ class $AssetsImagesGen {
         frame39428,
         group11,
         group39446,
+        noConnection,
         rectangle5,
         clipboardClose,
         clipboardClose2,

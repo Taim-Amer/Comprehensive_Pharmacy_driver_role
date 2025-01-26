@@ -1,6 +1,6 @@
+import 'package:comprehensive_pharmacy_driver_role/dependencies/signin_binding.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signin/signin_screen.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/home/no_internet_connection_screen.dart';
-import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/order_details_screen.dart';
-import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/order_screen.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/helper_functions.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/router/app_router.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/theme/theme.dart';
@@ -21,13 +21,13 @@ class PharmacyApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         theme: TAppTheme.lightTheme,
         darkTheme: TAppTheme.darkTheme,
-        // initialRoute: AppRoutes.setPassword,
+        initialRoute: AppRoutes.signin,
         getPages: AppRoutes.routes,
         // translations: TAppTranslations(),
         // locale: const Locale('en'),
         // fallbackLocale: const Locale('en'),
-        // initialBinding: ForgetPasswordBinding(),
-        home: const NoInternetConnectionScreen(),
+        initialBinding: SigninBinding(),
+        // home: const SigninScreen(),
       ),
     );
   }

@@ -1,43 +1,43 @@
 class TApiConstants {
   TApiConstants._();
 
-  static const String baseUrl = 'https://tahadebt.technoplus.dev/api/';
+  static const String baseUrl = 'https://pharmacy.technoplus.dev/api/';
 
-  static const String checkPhone = "check_phone";
+  static const String darkMap = 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png';
 
-  static const String verifyOtp = "verify_otp";
+  static const String lightMap = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-  static const String createAccount = "create_account";
+  static const String register = 'driver/register';
 
-  static const String resendOtp = "resend_otp";
+  static const String verify = 'otp/verify';
 
-  static const String getUserProfile = "user/get_my_profile";
+  static const String resend = 'otp/resend';
 
-  static const String editProfile = "user/update_my_profile";
+  static const String forget = 'ForgetPassword';
 
-  static const String getRegions = "user/get_regions";
+  static const String forgetVerify = 'otp/password/verify';
 
-  static const String getRecords = "user/get_records";
+  static const String forgetReset = 'resetPassword';
 
-  static const String createDebt = "user/create_debt";
+  static const String signin = 'driver/login';
 
-  static const String addPayment = "user/add_payment";
+  static const String change = 'pharmacists/toggle-status';
 
-  static const String addDebt = "user/add_debt";
+  static const String confirm = 'order/confirm';
 
-  static const String getMyDebts = "user/get_my_debts";
+  static const String reject = 'order/reject';
 
-  static const String getpharmacyProfile = "user/get_customer_profile";
+  static const String getOrders = 'pharmacist/orders';
 
-  static const String selectReminder = "user/select_reminder";
+  static const String showOrder = 'order/show';
 
-  static const String getNotes = "user/get_notes";
+  static const String getDrivers = 'drivers';
 
-  static const String updatepharmacyProfile = "user/update_customer_profile";
+  static const String assignOrder = 'order/assign-driver';
 
-  static const String sendNotification = "user/send_notification_to_users";
+  static const String updateOrder = 'order/status/on_the_way';
 
-  static const String getNotification = "user/get_notifications";
+  static const String addOrderPrice = 'order/add_price';
 
-  static const String logout = "user/logout";
+  static const String addDeliveryPrice = 'delivery-price';
 }
