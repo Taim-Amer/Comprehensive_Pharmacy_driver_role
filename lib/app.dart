@@ -1,6 +1,4 @@
 import 'package:comprehensive_pharmacy_driver_role/dependencies/signin_binding.dart';
-import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signin/signin_screen.dart';
-import 'package:comprehensive_pharmacy_driver_role/features/orders/views/home/no_internet_connection_screen.dart';
 import 'package:comprehensive_pharmacy_driver_role/localization/translations.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/helper_functions.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/router/app_router.dart';

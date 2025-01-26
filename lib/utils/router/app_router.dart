@@ -1,4 +1,5 @@
 import 'package:comprehensive_pharmacy_driver_role/dependencies/forget_password_binding.dart';
+import 'package:comprehensive_pharmacy_driver_role/dependencies/order_binding.dart';
 import 'package:comprehensive_pharmacy_driver_role/dependencies/otp_binding.dart';
 import 'package:comprehensive_pharmacy_driver_role/dependencies/signin_binding.dart';
 import 'package:comprehensive_pharmacy_driver_role/dependencies/signup_binding.dart';
@@ -9,6 +10,7 @@ import 'package:comprehensive_pharmacy_driver_role/features/authentication/views
 import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signin/signin_screen.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signup/otp_screen.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/authentication/views/signup/signup_screen.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/order_map.dart';
 import 'package:get/get.dart';
 
 class AppRoutes {
@@ -66,12 +68,12 @@ class AppRoutes {
         transition: Transition.fade
     ),
 
-    // GetPage(
-    //     name: order,
-    //     page: () => const OrderScreen(),
-    //     binding: OrderBinding(),
-    //     transition: Transition.fade
-    // ),
+    GetPage(
+        name: order,
+        page: () => const OrderMap(),
+        binding: OrderBinding(),
+        transition: Transition.fade
+    ),
 
     GetPage(
         name: passwordConfirm,
