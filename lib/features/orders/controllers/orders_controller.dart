@@ -19,6 +19,8 @@ class OrdersController extends GetxController {
   final pageController = PageController();
   Rx<int> currentPageIndex = 0.obs;
   Rx<bool> readyStatus = true.obs;
+  Rx<bool> isAccepted = false.obs;
+  Rx<bool> isRejected = false.obs;
 
   Rx<RequestState> getOrdersApiStatus = RequestState.begin.obs;
   Rx<RequestState> changeReadyApiStatus = RequestState.begin.obs;
@@ -142,6 +144,7 @@ class OrdersController extends GetxController {
     THelperFunctions.updateApiStatus(target: rejectApiStatus, value: RequestState.loading);
     await OrderRepoImpl.instance.reject(orderID: orderID).then((response){
       if(response.status == true){
+        isRejected.value = true;
         rejectModel.value = response;
         THelperFunctions.updateApiStatus(target: rejectApiStatus, value: RequestState.success);
         // Get.back();
@@ -162,6 +165,7 @@ class OrdersController extends GetxController {
     THelperFunctions.updateApiStatus(target: acceptApiStatus, value: RequestState.loading);
     await OrderRepoImpl.instance.accept(orderID: orderID).then((response){
       if(response.status == true){
+        isAccepted.value = true;
         acceptModel.value = response;
         THelperFunctions.updateApiStatus(target: acceptApiStatus, value: RequestState.success);
         // Get.back();

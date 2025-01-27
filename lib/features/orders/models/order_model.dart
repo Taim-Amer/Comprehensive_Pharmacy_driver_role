@@ -171,15 +171,26 @@ class Pharmacist {
   String? name;
   String? phone;
   String? email;
+  String? lat;
+  String? lng;
   Pharmacy? pharmacy;
 
-  Pharmacist({this.id, this.name, this.phone, this.email, this.pharmacy});
+  Pharmacist(
+      {this.id,
+        this.name,
+        this.phone,
+        this.email,
+        this.lat,
+        this.lng,
+        this.pharmacy});
 
   Pharmacist.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     phone = json['phone'];
     email = json['email'];
+    lat = json['lat'];
+    lng = json['lng'];
     pharmacy = json['pharmacy'] != null
         ? Pharmacy.fromJson(json['pharmacy'])
         : null;
@@ -191,6 +202,8 @@ class Pharmacist {
     data['name'] = name;
     data['phone'] = phone;
     data['email'] = email;
+    data['lat'] = lat;
+    data['lng'] = lng;
     if (pharmacy != null) {
       data['pharmacy'] = pharmacy!.toJson();
     }
@@ -225,14 +238,18 @@ class Customer {
   String? name;
   String? phone;
   String? email;
+  String? lat;
+  String? lng;
 
-  Customer({this.id, this.name, this.phone, this.email});
+  Customer({this.id, this.name, this.phone, this.email, this.lat, this.lng});
 
   Customer.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     phone = json['phone'];
     email = json['email'];
+    lat = json['lat'];
+    lng = json['lng'];
   }
 
   Map<String, dynamic> toJson() {
@@ -241,6 +258,8 @@ class Customer {
     data['name'] = name;
     data['phone'] = phone;
     data['email'] = email;
+    data['lat'] = lat;
+    data['lng'] = lng;
     return data;
   }
 }

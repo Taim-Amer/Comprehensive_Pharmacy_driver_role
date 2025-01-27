@@ -2,6 +2,7 @@ import 'package:comprehensive_pharmacy_driver_role/common/styles/spacing_styles.
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/icons/circular_icon.dart';
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/current_marker.dart';
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/road.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/orders/models/order_model.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/general_drawer.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/order_details_bottom_sheet.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/orders_header.dart';
@@ -12,12 +13,13 @@ import 'package:comprehensive_pharmacy_driver_role/utils/storage/cache_helper.da
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:latlong2/latlong.dart';
 
 class OrderMap extends StatefulWidget {
-  const OrderMap({super.key});
+  const OrderMap({super.key, required this.orders});
+
+  final List<Dataa> orders;
 
   @override
   State<OrderMap> createState() => _OrderMapState();
@@ -25,30 +27,25 @@ class OrderMap extends StatefulWidget {
 
 class _OrderMapState extends State<OrderMap> {
   final MapController _mapController = MapController();
-  final TextEditingController _locationController = TextEditingController();
+  bool _mapMovedManually = false;
 
-  LatLng? _destination;
+
+  // LatLng? _destination;
 
   @override
   void initState() {
     super.initState();
-    TMapServices.initializeLocation((location) {
-      _mapController.move(location, 15);
-    });
-  }
 
-  void _searchLocation() {
-    final location = _locationController.text.trim();
-    if (location.isNotEmpty) {
-      TMapServices.getCoordinates(location, (destination) {
-        setState(() {
-          _destination = destination;
-          TCacheHelper.saveData(key: 'userLat', value: _destination!.latitude);
-          TCacheHelper.saveData(key: 'userLng', value: _destination!.longitude);
-        });
-        _mapController.move(destination, 15);
-      });
-    }
+    final initialPosition = widget.orders.isNotEmpty ? LatLng(
+      double.parse(widget.orders.first.lat!),
+      double.parse(widget.orders.first.lng!),
+    ) : const LatLng(0, 0);
+
+    WidgetsBinding.instance.addPersistentFrameCallback((_) async {
+      if (widget.orders.isNotEmpty && !_mapMovedManually) {
+        _mapController.move(initialPosition, 15);
+      }
+    });
   }
 
   @override
@@ -67,6 +64,11 @@ class _OrderMapState extends State<OrderMap> {
                   options: MapOptions(
                     initialCenter: currentLocation ?? const LatLng(0, 0),
                     initialZoom: 15,
+                    onPositionChanged: (position, hasGesture) {
+                      if (hasGesture) {
+                        _mapMovedManually = true;
+                      }
+                    },
                   ),
                   children: [
                     TileLayer(
@@ -85,27 +87,30 @@ class _OrderMapState extends State<OrderMap> {
                           ),
                           TSizes.spaceBtwItems.verticalSpace,
                           const OrdersHeader()
-                          // const Spacer(),
-                          // SizedBox(
-                          //   height: 50.h,
-                          //   width: double.infinity,
-                          //   child: ElevatedButton(onPressed: () => Get.back(), child: Text(TEnglishTexts.tcontinue)),
-                          // )
                         ],
                       ),
                     ),
                     const TCurrentMarker(),
-                    if (_destination != null)
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: _destination!,
-                            width: 50,
-                            height: 50,
-                            child: SvgPicture.asset(TImages.searchIcon, color: dark ? TColors.light : TColors.dark),
-                          ),
-                        ],
-                      ),
+                    MarkerLayer(
+                      markers: [
+                        //Customer Point
+                        // Marker(
+                        //   point: LatLng(latitude, longitude),
+                        //   width: 50,
+                        //   height: 50,
+                        //   child: SvgPicture.asset(TImages.searchIcon, color: dark ? TColors.light : TColors.dark),
+                        // ),
+
+                        // Pharmacy Point
+                        // Marker(
+                        //   point: LatLng(latitude, longitude),
+                        //   width: 50,
+                        //   height: 50,
+                        //   child: SvgPicture.asset(TImages.searchIcon, color: dark ? TColors.light : TColors.dark),
+                        // ),
+                      ],
+                    ),
+
                     const TRoad(),
                   ],
                 );

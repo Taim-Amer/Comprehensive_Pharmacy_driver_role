@@ -19,27 +19,23 @@ class BottomSheetFooter extends StatelessWidget {
       child: Obx(() => Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              OrdersController.instance.rejectApiStatus.value ==
-                      RequestState.loading
+              OrdersController.instance.rejectApiStatus.value == RequestState.loading
                   ? SizedBox(height: 40.h, child: const LoadingWidget())
                   : Expanded(
                       child: SizedBox(
                           height: 40.h,
                           child: OutlinedButton(
-                              onPressed: () => OrdersController.instance
-                                  .reject(orderID: orderID),
+                              onPressed: () => OrdersController.instance.reject(orderID: orderID),
                               child: Text(TEnglishTexts.reject))),
                     ),
               TSizes.sm.horizontalSpace,
-              OrdersController.instance.acceptApiStatus.value ==
-                      RequestState.loading
+              OrdersController.instance.acceptApiStatus.value == RequestState.loading
                   ? SizedBox(height: 40.h, child: const LoadingWidget())
                   : Expanded(
                       child: SizedBox(
                           height: 40.h,
                           child: ElevatedButton(
-                              onPressed: () => OrdersController.instance
-                                  .accept(orderID: orderID),
+                              onPressed: () => OrdersController.instance.accept(orderID: orderID),
                               child: Text(TEnglishTexts.accept))),
                     ),
             ],
