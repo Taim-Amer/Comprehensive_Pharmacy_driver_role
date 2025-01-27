@@ -43,8 +43,12 @@ class OrdersController extends GetxController {
   final MapController mapController = MapController();
   final RxBool mapMovedManually = false.obs;
   final Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
-  late LatLng initialCustomerPosition;
-  late LatLng initialPharmacyPosition;
+  // late LatLng initialCustomerPosition;
+  // late LatLng initialPharmacyPosition;
+  final Rxn<LatLng> initialCustomerPosition = Rxn<LatLng>();
+  final Rxn<LatLng> initialPharmacyPosition = Rxn<LatLng>();
+
+  final RxList<Polyline> polylines = <Polyline>[].obs;
 
 
   @override
@@ -52,11 +56,12 @@ class OrdersController extends GetxController {
     await getOrders();
     initializePositions();
     TMapServices.initializeLocation((location) {
-      mapController.move(location, 12);
+      currentLocation.value = location;
+      mapController.move(location, 15);
+      _updateRoutes();
     });
     super.onReady();
   }
-
 
   var selectedChips = <bool>[true, false, false, false].obs;
   var orderStatusChipList = <String>[
@@ -78,26 +83,40 @@ class OrdersController extends GetxController {
   }
 
   Future<void> initializePositions() async {
-    final ordersData = OrdersController.instance.ordersModel.value.data?.data;
+    final ordersData = ordersModel.value.data?.data;
 
     if (ordersData != null && ordersData.isNotEmpty) {
-      initialCustomerPosition = LatLng(
+      initialCustomerPosition.value = LatLng(
         double.tryParse(ordersData.lastOrNull?.customer?.lat ?? '0') ?? 0.0,
         double.tryParse(ordersData.lastOrNull?.customer?.lng ?? '0') ?? 0.0,
       );
-      initialPharmacyPosition = LatLng(
+      initialPharmacyPosition.value = LatLng(
         double.tryParse(ordersData.lastOrNull?.pharmacist?.lat ?? '0') ?? 0.0,
         double.tryParse(ordersData.lastOrNull?.pharmacist?.lng ?? '0') ?? 0.0,
       );
     } else {
-      initialCustomerPosition = const LatLng(0, 0);
-      initialPharmacyPosition = const LatLng(0, 0);
+      initialCustomerPosition.value = const LatLng(0, 0);
+      initialPharmacyPosition.value = const LatLng(0, 0);
     }
+    _updateRoutes();
   }
 
   void onPositionChanged(MapCamera position, bool hasGesture) {
     if (hasGesture) {
       mapMovedManually.value = true;
+    }
+  }
+
+  Future<void> _updateRoutes() async {
+    final currentLocation = this.currentLocation.value;
+    if (currentLocation == null) return;
+
+    TMapServices.getRoute(currentLocation, initialCustomerPosition.value!);
+
+    TMapServices.getRoute(currentLocation, initialPharmacyPosition.value!);
+
+    if (initialCustomerPosition.value != null && initialPharmacyPosition.value != null) {
+      TMapServices.getRoute(initialPharmacyPosition.value!, initialCustomerPosition.value!);
     }
   }
 

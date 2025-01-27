@@ -66,23 +66,32 @@ class TMapServices {
         final lon = double.parse(data[0]['lon']);
         final destination = LatLng(lat, lon);
         onDestinationUpdate(destination);
-        await getRoute(destination);
+        await getRoute(currentLocationNotifier.value,destination);
       }
     }
   }
 
-  static Future<void> getRoute(LatLng destination) async {
-    final currentLocation = currentLocationNotifier.value;
-    if (currentLocation == null) return;
+  static Future<void> getRoute(LatLng? source, LatLng destination) async {
+    final currentLocation = source ?? currentLocationNotifier.value;
 
-    final url = Uri.parse('http://router.project-osrm.org/route/v1/driving/${currentLocation.longitude},${currentLocation.latitude};${destination.longitude},${destination.latitude}?overview=full&geometries=polyline');
+    if (currentLocation == null || destination == null) return;
+
+    final url = Uri.parse(
+        'http://router.project-osrm.org/route/v1/driving/${currentLocation.longitude},${currentLocation.latitude};${destination.longitude},${destination.latitude}?overview=full&geometries=polyline'
+    );
+
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
       final geometry = data['routes'][0]['geometry'];
       final routePolyline = decodePolyline(geometry);
-      routeNotifier.value = routePolyline.map((point) => LatLng(point[0], point[1])).toList();
+
+      // تحديث routeNotifier لجميع الطرق
+      routeNotifier.value = [
+        ...routeNotifier.value,  // الاحتفاظ بالطرق السابقة إن وجدت
+        ...routePolyline.map((point) => LatLng(point[0], point[1])).toList()
+      ];
     }
   }
 
