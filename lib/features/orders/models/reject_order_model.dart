@@ -31,21 +31,22 @@ class Order {
   int? pharmacistId;
   int? driverId;
   String? status;
-  Null? description;
+  String? description;
   String? price;
   String? createdAt;
   String? updatedAt;
 
-  Order(
-      {this.id,
-        this.customerId,
-        this.pharmacistId,
-        this.driverId,
-        this.status,
-        this.description,
-        this.price,
-        this.createdAt,
-        this.updatedAt});
+  Order({
+    this.id,
+    this.customerId,
+    this.pharmacistId,
+    this.driverId,
+    this.status,
+    this.description,
+    this.price,
+    this.createdAt,
+    this.updatedAt,
+  });
 
   Order.fromJson(Map<String, dynamic> json) {
     id = json['id'];

@@ -29,7 +29,7 @@ class TApiConstants {
 
   static const String reject = 'driver/order_reject';
 
-  static const String getOrders = 'pharmacist/orders';
+  static const String getOrders = 'drivers/orders';
 
   static const String showOrder = 'order/show';
 
