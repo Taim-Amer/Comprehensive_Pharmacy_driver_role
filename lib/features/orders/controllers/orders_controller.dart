@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 class OrdersController extends GetxController {
   static OrdersController get instance => Get.find<OrdersController>();
 
-  final pageController = PageController(viewportFraction: .8);
+  final pageController = PageController();
   Rx<int> currentPageIndex = 0.obs;
   Rx<bool> readyStatus = true.obs;
 

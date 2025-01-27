@@ -1,23 +1,18 @@
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/icons/circular_icon.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/orders/controllers/orders_controller.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/bottom_sheet_footer.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/description_item.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/image_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/formatters/formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
-class BottomSheetBody extends StatefulWidget {
-  BottomSheetBody({super.key});
-
-  int currentPage = 0;
-
-  @override
-  State<BottomSheetBody> createState() => _BottomSheetBodyState();
-}
-
-class _BottomSheetBodyState extends State<BottomSheetBody> {
-  final PageController pageController = PageController();
+class BottomSheetBody extends StatelessWidget {
+  const BottomSheetBody({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +24,13 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
           children: [
             GestureDetector(
               onTap: () {
-                if (widget.currentPage > 0) {
-                  setState(() {
-                    widget.currentPage--;
-                    pageController.animateToPage(
-                      widget.currentPage,
+                if (OrdersController.instance.currentPageIndex.value > 0) {
+                  OrdersController.instance.currentPageIndex.value--;
+                  OrdersController.instance.pageController.animateToPage(
+                      OrdersController.instance.currentPageIndex.value,
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                     );
-                  });
                 }
               },
               child: const TCircularIcon(
@@ -45,24 +38,19 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                 showBorder: false,
               ),
             ),
-            Text(
-              "Order ${widget.currentPage + 1}/2",
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge
-                  ?.copyWith(fontWeight: FontWeight.w500),
-            ),
+            Obx(() => Text(
+              "Order ${OrdersController.instance.currentPageIndex.value + 1}/${OrdersController.instance.ordersModel.value.data?.data?.length}",
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+            )),
             GestureDetector(
               onTap: () {
-                if (widget.currentPage < 1) {
-                  setState(() {
-                    widget.currentPage++;
-                    pageController.animateToPage(
-                      widget.currentPage,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                    );
-                  });
+                if (OrdersController.instance.currentPageIndex.value < 1) {
+                  OrdersController.instance.currentPageIndex.value++;
+                  OrdersController.instance.pageController.animateToPage(
+                    OrdersController.instance.currentPageIndex.value,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                  );
                 }
               },
               child: const TCircularIcon(
@@ -75,8 +63,9 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
         //====================srtart
         Expanded(
           child: PageView.builder(
-            controller: pageController,
-            onPageChanged: (index) => setState(() => widget.currentPage = index),
+            itemCount: OrdersController.instance.ordersModel.value.data?.data?.length,
+            controller: OrdersController.instance.pageController,
+            onPageChanged: (index) => OrdersController.instance.currentPageIndex.value = index,
             itemBuilder: (context, index) => Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -89,8 +78,8 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      DescriptionItem(image: TImages.pharmaIcon, title: TEnglishTexts.pharmacyName, subTitle: "Order No: # 34566"),
-                      DescriptionItem(image: TImages.calenderIcon, title: TEnglishTexts.orderDate, subTitle: "Order No: # 34566"),
+                      DescriptionItem(image: TImages.pharmaIcon, title: TEnglishTexts.pharmacyName, subTitle: OrdersController.instance.ordersModel.value.data?.data?[index].pharmacist!.pharmacy!.pharmacyName ?? ''),
+                      DescriptionItem(image: TImages.calenderIcon, title: TEnglishTexts.orderDate, subTitle: TFormatter.formatDate(OrdersController.instance.ordersModel.value.data?.data?[index].createdAt ?? '')),
                     ],
                   ),
                   const Padding(
@@ -100,7 +89,7 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      DescriptionItem(image: TImages.mobileIcon, title: TEnglishTexts.phoneNumber, subTitle: "Order No: # 34566"),
+                      DescriptionItem(image: TImages.mobileIcon, title: TEnglishTexts.phoneNumber, subTitle: TFormatter.formatPhoneNumber(OrdersController.instance.ordersModel.value.data?.data?[index].pharmacist!.phone ?? '')),
                       DescriptionItem(image: TImages.locationIcon, title: TEnglishTexts.location, subTitle: "Order No: # 34566"),
                     ],
                   ),
@@ -108,26 +97,27 @@ class _BottomSheetBodyState extends State<BottomSheetBody> {
                     padding: EdgeInsets.all(10.0),
                     child: TRoundedContainer(width: double.infinity, height: 1, backgroundColor: Color(0xFFE7E7E7)),
                   ),
-                  DescriptionItem(image: TImages.noteIcon, title: TEnglishTexts.pharmacyName, subTitle: "Order No: # 34566", showDes: false),
+                  DescriptionItem(image: TImages.noteIcon, title: TEnglishTexts.note, subTitle: "Order No: # 34566", showDes: false),
                   TSizes.spaceBtwItems.verticalSpace,
-                  Expanded(child: TRoundedContainer(backgroundColor: const Color(0xFFE7E7E7), height: 100.h,)),
+                  Expanded(
+                      child: TRoundedContainer(
+                        width: double.infinity,
+                        backgroundColor: const Color(0xFFE7E7E7),
+                        height: 100.h,
+                        padding: const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace, vertical: TSizes.sm),
+                        child: Text(OrdersController.instance.ordersModel.value.data?.data?[index].description ?? "No notes for this order ..."),
+                      ),
+                  ),
                 ],
               ),
             ),
-            itemCount: 5,
           ),
         ),
         //=====================End
         TSizes.spaceBtwItems.verticalSpace,
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Expanded(child: SizedBox(height: 40.h, child: OutlinedButton(onPressed: (){}, child: Text(TEnglishTexts.reject)))),
-            TSizes.sm.horizontalSpace,
-            Expanded(child: SizedBox(height: 40.h, child: ElevatedButton(onPressed: (){}, child: Text(TEnglishTexts.accept)))),
-          ],
-        ),
+        const BottomSheetFooter()
       ],
     );
   }
 }
+

@@ -45,6 +45,7 @@ class TArabicTexts {
   static String get resetSuccessSubTitle => '';
   static String get pharmacistName => '';
   static String get pharmacyName => '';
+  static String get note => '';
   static String get driverName => '';
 
   // Orders
@@ -198,6 +199,7 @@ class TEnglishTexts {
   static String get resetSuccessSubTitle => 'Your new password is ready to use. Log in and regain access to your account seamlessly!';
   static String get pharmacistName => 'Pharmacist name';
   static String get pharmacyName => 'Pharmacy Name';
+  static String get note => 'Note';
   static String get driverName => 'Driver Name';
 
   // Orders
