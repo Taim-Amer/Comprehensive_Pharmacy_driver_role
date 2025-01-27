@@ -117,6 +117,46 @@ class OrdersController extends GetxController {
     });
   }
 
+  Future<void> confirm({required int orderID}) async{
+    THelperFunctions.updateApiStatus(target: confirmApiStatus, value: RequestState.loading);
+    await OrderRepoImpl.instance.confirm(orderID: orderID).then((response){
+      if(response.status == true){
+        confirmModel.value = response;
+        THelperFunctions.updateApiStatus(target: confirmApiStatus, value: RequestState.success);
+        // Get.off(() => DriversMap(drivers: driversModel.value.drivers ?? []), transition: Transition.rightToLeft);
+        // TCacheHelper.saveData(key: 'order_id', value: orderID);
+        // getMyOrders(status: "pending");
+      } else{
+        THelperFunctions.updateApiStatus(target: confirmApiStatus, value: RequestState.error);
+        showSnackBar(response.message ?? '', AlertState.warning);
+      }
+    }).catchError((error){
+      TLoggerHelper.error(error.toString());
+      THelperFunctions.updateApiStatus(target: confirmApiStatus, value: RequestState.error);
+      showSnackBar(TranslationKey.kErrorMessage, AlertState.error);
+    });
+  }
+
+  Future<void> reject({required int orderID}) async{
+    THelperFunctions.updateApiStatus(target: rejectApiStatus, value: RequestState.loading);
+    await OrderRepoImpl.instance.reject(orderID: orderID).then((response){
+      if(response.status == true){
+        rejectModel.value = response;
+        THelperFunctions.updateApiStatus(target: rejectApiStatus, value: RequestState.success);
+        // Get.back();
+        // getMyOrders(status: "pending");
+        showSnackBar(response.message ?? '', AlertState.success);
+      } else{
+        THelperFunctions.updateApiStatus(target: rejectApiStatus, value: RequestState.error);
+        showSnackBar(response.message ?? '', AlertState.warning);
+      }
+    }).catchError((error){
+      TLoggerHelper.error(error.toString());
+      THelperFunctions.updateApiStatus(target: rejectApiStatus, value: RequestState.error);
+      showSnackBar(TranslationKey.kErrorMessage, AlertState.error);
+    });
+  }
+
 
 
 }
