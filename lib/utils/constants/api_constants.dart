@@ -21,11 +21,13 @@ class TApiConstants {
 
   static const String signin = 'driver/login';
 
-  static const String change = 'pharmacists/toggle-status';
+  static const String change = 'drivers/toggle-status';
 
-  static const String confirm = 'order/confirm';
+  static const String accept = 'driver/order_accept';
 
-  static const String reject = 'order/reject';
+  static const String confirm = 'driver/confirmDelivered';
+
+  static const String reject = 'driver/order_reject';
 
   static const String getOrders = 'pharmacist/orders';
 
