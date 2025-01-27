@@ -1,12 +1,11 @@
-import 'package:comprehensive_pharmacy_driver_role/common/widgets/appbar/appbar.dart';
+import 'package:comprehensive_pharmacy_driver_role/common/styles/spacing_styles.dart';
+import 'package:comprehensive_pharmacy_driver_role/common/widgets/icons/circular_icon.dart';
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/current_marker.dart';
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/road.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/general_drawer.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/orders_header.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/api_constants.dart';
-import 'package:comprehensive_pharmacy_driver_role/utils/constants/colors.dart';
-import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
-import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/exports.dart';
-import 'package:comprehensive_pharmacy_driver_role/utils/helpers/helper_functions.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/services/map_services.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/storage/cache_helper.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +54,7 @@ class _OrderMapState extends State<OrderMap> {
   Widget build(BuildContext context) {
     final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
-      appBar: const TAppBar(showBackArrow: true),
+      drawer: const GeneralDrawer(),
       body: Column(
         children: [
           Expanded(
@@ -73,25 +72,24 @@ class _OrderMapState extends State<OrderMap> {
                       urlTemplate: dark ? TApiConstants.darkMap : TApiConstants.lightMap,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(TSizes.defaultSpace),
+                      padding: TSpacingStyle.paddingWithAppBarHeight,
                       child: Column(
                         children: [
-                          TextFormField(
-                            controller: _locationController,
-                            enableInteractiveSelection: false,
-                            cursorColor: TColors.primary,
-                            onFieldSubmitted: (value) => _searchLocation(),
-                            decoration: InputDecoration(
-                              hintText: TEnglishTexts.addressEnter,
-                              prefixIcon: const Icon(Iconsax.location),
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              TCircularIcon(icon: Icons.more_vert, showBorder: true, onPressed: () => Scaffold.of(context).openDrawer(),),
+                              const TCircularIcon(icon: Iconsax.notification, showBorder: true,),
+                            ],
                           ),
-                          const Spacer(),
-                          SizedBox(
-                            height: 50.h,
-                            width: double.infinity,
-                            child: ElevatedButton(onPressed: () => Get.back(), child: Text(TEnglishTexts.tcontinue)),
-                          )
+                          TSizes.spaceBtwItems.verticalSpace,
+                          const OrdersHeader()
+                          // const Spacer(),
+                          // SizedBox(
+                          //   height: 50.h,
+                          //   width: double.infinity,
+                          //   child: ElevatedButton(onPressed: () => Get.back(), child: Text(TEnglishTexts.tcontinue)),
+                          // )
                         ],
                       ),
                     ),

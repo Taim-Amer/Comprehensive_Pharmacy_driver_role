@@ -13,7 +13,7 @@ class TCircularIcon extends StatelessWidget {
     this.backgroundColor,
     this.color,
     this.onPressed,
-    this.radius = 100,
+    this.radius = 20, required this.showBorder,
   });
 
   final double? width, height, size;
@@ -22,6 +22,7 @@ class TCircularIcon extends StatelessWidget {
   final Color? color;
   final IconData icon;
   final VoidCallback? onPressed;
+  final bool showBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class TCircularIcon extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius!),
+        border: Border.all(color: showBorder ? TColors.primary : Colors.transparent),
         color: backgroundColor ?? (dark ? TColors.black.withOpacity(.9) : TColors.white.withOpacity(.9)),
       ),
       child: IconButton(

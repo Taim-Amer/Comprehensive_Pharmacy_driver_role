@@ -20,7 +20,8 @@ class TDrawerHeader extends StatelessWidget {
           color: Colors.white,
           backgroundColor: TColors.primary,
           width: 38.w,
-          height: 38.h,
+          height: 38.h, 
+          showBorder: false,
         ),
         TSizes.sm.horizontalSpace,
         TRoundedContainer(
@@ -42,7 +43,7 @@ class TDrawerHeader extends StatelessWidget {
           color: Colors.white,
           backgroundColor: TColors.primary,
           width: 28.w,
-          height: 28.h,
+          height: 28.h, showBorder: false,
         ),
       ],
     );
