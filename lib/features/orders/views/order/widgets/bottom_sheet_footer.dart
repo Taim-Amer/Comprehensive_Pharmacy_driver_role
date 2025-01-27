@@ -8,13 +8,16 @@ class BottomSheetFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Expanded(child: SizedBox(height: 40.h, child: OutlinedButton(onPressed: (){}, child: Text(TEnglishTexts.reject)))),
-        TSizes.sm.horizontalSpace,
-        Expanded(child: SizedBox(height: 40.h, child: ElevatedButton(onPressed: (){}, child: Text(TEnglishTexts.accept)))),
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(child: SizedBox(height: 40.h, child: OutlinedButton(onPressed: (){}, child: Text(TEnglishTexts.reject)))),
+          TSizes.sm.horizontalSpace,
+          Expanded(child: SizedBox(height: 40.h, child: ElevatedButton(onPressed: (){}, child: Text(TEnglishTexts.accept)))),
+        ],
+      ),
     );
   }
 }
