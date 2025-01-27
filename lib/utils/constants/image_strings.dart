@@ -80,4 +80,5 @@ class TImages {
   static const String documentIcon = 'assets/icons/document-text.svg';
   static const String locationIcon = 'assets/icons/location.svg';
   static const String mobileIcon = 'assets/icons/mobile.svg';
+  static const String customerIcon = 'assets/icons/location.svg';
 }
