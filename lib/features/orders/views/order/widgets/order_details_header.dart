@@ -8,10 +8,10 @@ class OrderDetailsHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Obx(() => Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        TCircularIcon(
+        OrdersController.instance.currentPageIndex.value != 0 ? TCircularIcon(
           icon: Icons.arrow_back_ios_new_rounded,
           showBorder: false,
           onPressed: () {
@@ -24,12 +24,14 @@ class OrderDetailsHeader extends StatelessWidget {
               );
             }
           },
+        ) : const SizedBox(),
+        Center(
+          child: Text(
+            "Order ${OrdersController.instance.currentPageIndex.value}/${OrdersController.instance.ordersModel.value.data?.data?.length}",
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
+          ),
         ),
-        Obx(() => Text(
-          "Order ${OrdersController.instance.currentPageIndex.value}/${OrdersController.instance.ordersModel.value.data?.data?.length}",
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500),
-        )),
-        TCircularIcon(
+        OrdersController.instance.currentPageIndex.value != OrdersController.instance.ordersModel.value.data?.data?.length ? TCircularIcon(
           icon: Icons.arrow_forward_ios_rounded,
           showBorder: false,
           onPressed: () {
@@ -43,8 +45,8 @@ class OrderDetailsHeader extends StatelessWidget {
               );
             }
           },
-        ),
+        ) : const SizedBox(),
       ],
-    );
+    ));
   }
 }

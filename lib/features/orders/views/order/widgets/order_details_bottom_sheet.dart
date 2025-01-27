@@ -15,7 +15,7 @@ Future<dynamic> showOrderDetailsBottomsheet({required String name, required Stri
       return SizedBox(
         height: 460.h,
         child: const Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0),
           child: BottomSheetBody(),
         ),
       );

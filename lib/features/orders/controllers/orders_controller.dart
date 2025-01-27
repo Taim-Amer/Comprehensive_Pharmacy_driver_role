@@ -88,11 +88,6 @@ class OrdersController extends GetxController {
     await OrderRepoImpl.instance.getOrders().then((response){
       if(response.status == true){
         ordersModel.value = response;
-        // if (myOrdersModel.value.data is List && (myOrdersModel.value.data as List).isEmpty) {
-        //   THelperFunctions.updateApiStatus(target: getMyOrdersApiStatus, value: RequestState.loading);
-        //   THelperFunctions.updateApiStatus(target: getMyOrdersApiStatus, value: RequestState.noData);
-        //   emptyForm(status!);
-        // }
         THelperFunctions.updateApiStatus(target: getOrdersApiStatus, value: RequestState.success);
       } else{
         THelperFunctions.updateApiStatus(target: getOrdersApiStatus, value: RequestState.error);
@@ -163,6 +158,23 @@ class OrdersController extends GetxController {
     });
   }
 
-
-
+  Future<void> accept({required int orderID}) async{
+    THelperFunctions.updateApiStatus(target: acceptApiStatus, value: RequestState.loading);
+    await OrderRepoImpl.instance.accept(orderID: orderID).then((response){
+      if(response.status == true){
+        acceptModel.value = response;
+        THelperFunctions.updateApiStatus(target: acceptApiStatus, value: RequestState.success);
+        // Get.back();
+        // getMyOrders(status: "pending");
+        showSnackBar(response.message ?? '', AlertState.success);
+      } else{
+        THelperFunctions.updateApiStatus(target: acceptApiStatus, value: RequestState.error);
+        showSnackBar(response.message ?? '', AlertState.warning);
+      }
+    }).catchError((error){
+      TLoggerHelper.error(error.toString());
+      THelperFunctions.updateApiStatus(target: acceptApiStatus, value: RequestState.error);
+      showSnackBar(TranslationKey.kErrorMessage, AlertState.error);
+    });
+  }
 }
