@@ -2,4 +2,5 @@ import 'package:comprehensive_pharmacy_driver_role/features/orders/models/change
 
 abstract class OrderRepo{
   Future<ChangeReadyModel> changeReady();
+  
 }
