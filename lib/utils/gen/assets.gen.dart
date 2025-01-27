@@ -12,6 +12,9 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/Group 39480 (1).svg
+  String get group394801 => 'assets/icons/Group 39480 (1).svg';
+
   /// File path: assets/icons/Upload icon.svg
   String get uploadIcon => 'assets/icons/Upload icon.svg';
 
@@ -21,14 +24,33 @@ class $AssetsIconsGen {
   /// File path: assets/icons/box-time.svg
   String get boxTime => 'assets/icons/box-time.svg';
 
+  /// File path: assets/icons/calendar.svg
+  String get calendar => 'assets/icons/calendar.svg';
+
   /// File path: assets/icons/clipboard-tick.svg
   String get clipboardTick => 'assets/icons/clipboard-tick.svg';
+
+  /// File path: assets/icons/document-text.svg
+  String get documentText => 'assets/icons/document-text.svg';
 
   /// File path: assets/icons/edit.svg
   String get edit => 'assets/icons/edit.svg';
 
   /// Directory path: assets/icons/flags
   $AssetsIconsFlagsGen get flags => const $AssetsIconsFlagsGen();
+
+  /// File path: assets/icons/location.svg
+  String get location => 'assets/icons/location.svg';
+
+  /// File path: assets/icons/mobile.svg
+  String get mobile => 'assets/icons/mobile.svg';
+
+  /// File path: assets/icons/motor-scooter-svgrepo-com 5.svg
+  String get motorScooterSvgrepoCom5 =>
+      'assets/icons/motor-scooter-svgrepo-com 5.svg';
+
+  /// File path: assets/icons/noun-pin-608665 1.svg
+  String get nounPin6086651 => 'assets/icons/noun-pin-608665 1.svg';
 
   /// File path: assets/icons/trash.svg
   String get trash => 'assets/icons/trash.svg';
@@ -37,8 +59,22 @@ class $AssetsIconsGen {
   String get truckFast => 'assets/icons/truck-fast.svg';
 
   /// List of all assets
-  List<String> get values =>
-      [uploadIcon, boxTick, boxTime, clipboardTick, edit, trash, truckFast];
+  List<String> get values => [
+        group394801,
+        uploadIcon,
+        boxTick,
+        boxTime,
+        calendar,
+        clipboardTick,
+        documentText,
+        edit,
+        location,
+        mobile,
+        motorScooterSvgrepoCom5,
+        nounPin6086651,
+        trash,
+        truckFast
+      ];
 }
 
 class $AssetsImagesGen {

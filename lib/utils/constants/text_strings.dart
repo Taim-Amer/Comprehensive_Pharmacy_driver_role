@@ -88,6 +88,8 @@ class TArabicTexts {
   static String get locationCustomer => '';
   static String get confirmOrder => '';
   static String get rejectOrder => '';
+  static String get reject => '';
+  static String get accept => '';
 
   // Home
   static String get homeTitle => '';
@@ -242,6 +244,8 @@ class TEnglishTexts {
   static String get locationCustomer => 'Customer location';
   static String get confirmOrder => 'Confirm order';
   static String get rejectOrder => 'Reject order';
+  static String get reject => 'Reject';
+  static String get accept => 'Accept';
 
   // Home
   static String get homeTitle => 'Upload your prescription';

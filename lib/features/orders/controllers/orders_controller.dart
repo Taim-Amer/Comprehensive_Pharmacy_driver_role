@@ -36,6 +36,12 @@ class OrdersController extends GetxController {
   //====
   final acceptModel = AcceptOrderModel().obs;
 
+  @override
+  void onReady() {
+    getOrders();
+    super.onReady();
+  }
+
 
   var selectedChips = <bool>[true, false, false, false].obs;
   var orderStatusChipList = <String>[

@@ -3,6 +3,7 @@ import 'package:comprehensive_pharmacy_driver_role/common/widgets/icons/circular
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/current_marker.dart';
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/road.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/general_drawer.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/order_details_bottom_sheet.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/orders_header.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/api_constants.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/exports.dart';
@@ -79,7 +80,7 @@ class _OrderMapState extends State<OrderMap> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               TCircularIcon(icon: Icons.more_vert, showBorder: true, onPressed: () => Scaffold.of(context).openDrawer(),),
-                              const TCircularIcon(icon: Iconsax.notification, showBorder: true,),
+                              TCircularIcon(icon: Iconsax.notification, showBorder: true, onPressed: () => showOrderDetailsBottomsheet(name: "Taim", phone: "0997421905", distance: 1, driverID: 1),),
                             ],
                           ),
                           TSizes.spaceBtwItems.verticalSpace,

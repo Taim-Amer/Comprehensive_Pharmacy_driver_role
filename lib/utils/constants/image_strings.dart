@@ -74,4 +74,10 @@ class TImages {
   static const String noConnection = 'assets/images/NoConnection.svg';
   static const String searchIcon = 'assets/icons/noun-pin-608665 1.svg';
   static const String motorIcon = 'assets/icons/motor-scooter-svgrepo-com 5.svg';
+  static const String pharmaIcon = 'assets/icons/Group 39480 (1).svg';
+  static const String noteIcon = 'assets/icons/document-text.svg';
+  static const String calenderIcon = 'assets/icons/calendar.svg';
+  static const String documentIcon = 'assets/icons/document-text.svg';
+  static const String locationIcon = 'assets/icons/location.svg';
+  static const String mobileIcon = 'assets/icons/mobile.svg';
 }
