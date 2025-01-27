@@ -10,8 +10,11 @@ import 'package:comprehensive_pharmacy_driver_role/utils/constants/enums.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/helper_functions.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/logging/logger.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/services/map_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 class OrdersController extends GetxController {
   static OrdersController get instance => Get.find<OrdersController>();
@@ -27,7 +30,6 @@ class OrdersController extends GetxController {
   Rx<RequestState> orderDetailsApiStatus = RequestState.begin.obs;
   Rx<RequestState> confirmApiStatus = RequestState.begin.obs;
   Rx<RequestState> rejectApiStatus = RequestState.begin.obs;
-  //=====
   Rx<RequestState> acceptApiStatus = RequestState.begin.obs;
 
   final ordersModel = OrdersModel().obs;
@@ -35,12 +37,23 @@ class OrdersController extends GetxController {
   final orderDetailsModel = OrderDetailsModel().obs;
   final confirmModel = AcceptOrderModel().obs;
   final rejectModel = RejectOrderModel().obs;
-  //====
   final acceptModel = AcceptOrderModel().obs;
 
+  //Map
+  final MapController mapController = MapController();
+  final RxBool mapMovedManually = false.obs;
+  final Rx<LatLng?> currentLocation = Rx<LatLng?>(null);
+  late LatLng initialCustomerPosition;
+  late LatLng initialPharmacyPosition;
+
+
   @override
-  void onReady() {
-    getOrders();
+  void onReady() async{
+    await getOrders();
+    initializePositions();
+    TMapServices.initializeLocation((location) {
+      mapController.move(location, 12);
+    });
     super.onReady();
   }
 
@@ -62,6 +75,30 @@ class OrdersController extends GetxController {
   void dotNavigationClick(index) {
     currentPageIndex.value = index;
     pageController.jumpTo(index);
+  }
+
+  Future<void> initializePositions() async {
+    final ordersData = OrdersController.instance.ordersModel.value.data?.data;
+
+    if (ordersData != null && ordersData.isNotEmpty) {
+      initialCustomerPosition = LatLng(
+        double.tryParse(ordersData.lastOrNull?.customer?.lat ?? '0') ?? 0.0,
+        double.tryParse(ordersData.lastOrNull?.customer?.lng ?? '0') ?? 0.0,
+      );
+      initialPharmacyPosition = LatLng(
+        double.tryParse(ordersData.lastOrNull?.pharmacist?.lat ?? '0') ?? 0.0,
+        double.tryParse(ordersData.lastOrNull?.pharmacist?.lng ?? '0') ?? 0.0,
+      );
+    } else {
+      initialCustomerPosition = const LatLng(0, 0);
+      initialPharmacyPosition = const LatLng(0, 0);
+    }
+  }
+
+  void onPositionChanged(MapCamera position, bool hasGesture) {
+    if (hasGesture) {
+      mapMovedManually.value = true;
+    }
   }
 
   Future<bool> changeReady() async{
