@@ -99,5 +99,24 @@ class OrdersController extends GetxController {
     });
   }
 
+  Future<void> showOrder({required int orderID}) async{
+    THelperFunctions.updateApiStatus(target: orderDetailsApiStatus, value: RequestState.loading);
+    await OrderRepoImpl.instance.showOrder(orderID: orderID).then((response){
+      if(response.status == true){
+        orderDetailsModel.value = response;
+        THelperFunctions.updateApiStatus(target: orderDetailsApiStatus, value: RequestState.success);
+        // Get.to(() => const OrderDetailsScreen());
+      } else{
+        THelperFunctions.updateApiStatus(target: orderDetailsApiStatus, value: RequestState.error);
+        showSnackBar(response.message ?? '', AlertState.warning);
+      }
+    }).catchError((error){
+      TLoggerHelper.error(error.toString());
+      THelperFunctions.updateApiStatus(target: orderDetailsApiStatus, value: RequestState.error);
+      showSnackBar(TranslationKey.kErrorMessage, AlertState.error);
+    });
+  }
+
+
 
 }
