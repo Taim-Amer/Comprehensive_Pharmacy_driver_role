@@ -96,6 +96,8 @@ class OrdersController extends GetxController {
         double.tryParse(ordersData[index ?? 0].pharmacist?.lat ?? '0') ?? 0.0,
         double.tryParse(ordersData[index ?? 0].pharmacist?.lng ?? '0') ?? 0.0,
       );
+      print(initialPharmacyPosition);
+      print(initialCustomerPosition);
     } else {
       initialCustomerPosition.value = const LatLng(0, 0);
       initialPharmacyPosition.value = const LatLng(0, 0);

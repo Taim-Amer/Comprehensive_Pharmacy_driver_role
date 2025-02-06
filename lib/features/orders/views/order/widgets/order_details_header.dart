@@ -17,8 +17,8 @@ class OrderDetailsHeader extends StatelessWidget {
           showBorder: false,
           onPressed: () {
             if (OrdersController.instance.currentPageIndex.value > 0) {
-              // OrdersController.instance.showOrder(orderID: TCacheHelper.getData(key: 'order_id'));
               OrdersController.instance.currentPageIndex.value--;
+              OrdersController.instance.initializePositions(index: OrdersController.instance.currentPageIndex.value--);
               OrdersController.instance.pageController.animateToPage(
                 OrdersController.instance.currentPageIndex.value,
                 duration: const Duration(milliseconds: 300),
@@ -38,8 +38,7 @@ class OrderDetailsHeader extends StatelessWidget {
           showBorder: false,
           onPressed: () {
             if (OrdersController.instance.currentPageIndex.value < (OrdersController.instance.ordersModel.value.data?.data?.length ?? 0)) {
-              // OrdersController.instance.showOrder(orderID: TCacheHelper.getData(key: 'order_id'));
-              OrdersController.instance.currentPageIndex.value++;
+              OrdersController.instance.initializePositions(index: OrdersController.instance.currentPageIndex.value++);
               OrdersController.instance.pageController.animateToPage(
                 OrdersController.instance.currentPageIndex.value,
                 duration: const Duration(milliseconds: 300),
