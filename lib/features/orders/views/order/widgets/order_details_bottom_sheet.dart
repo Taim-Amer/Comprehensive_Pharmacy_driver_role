@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-Future<dynamic> showOrderDetailsBottomsheet({required String name, required String phone, required int distance, required int driverID}){
+Future<dynamic> showOrderDetailsBottomsheet(){
   return showModalBottomSheet(
     isScrollControlled: true,
     showDragHandle: false,

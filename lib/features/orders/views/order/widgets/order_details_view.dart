@@ -5,7 +5,6 @@ import 'package:comprehensive_pharmacy_driver_role/utils/constants/image_strings
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/formatters/formatter.dart';
-import 'package:comprehensive_pharmacy_driver_role/utils/storage/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,9 +16,15 @@ class OrderDetailsView extends StatelessWidget {
     return PageView.builder(
       itemCount: OrdersController.instance.ordersModel.value.data?.data?.length,
       controller: OrdersController.instance.pageController,
-      onPageChanged: (index) => OrdersController.instance.currentPageIndex.value = index,
+      onPageChanged: (index){
+        OrdersController.instance.currentPageIndex.value = index;
+        OrdersController.instance.initializePositions(index: index);
+      },
       itemBuilder: (context, index){
-        TCacheHelper.saveData(key: 'order_id', value: index);
+        // TCacheHelper.saveData(key: 'order_id', value: OrdersController.instance.ordersModel.value.data?.data?.firstOrNull!.id);
+        // print(OrdersController.instance.orderDetailsModel.value.data!.id);
+        // print(OrdersController.instance.orderDetailsModel.value.data!.id);
+        // print(OrdersController.instance.orderDetailsModel.value.data!.id);
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -44,7 +49,7 @@ class OrderDetailsView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   DescriptionItem(image: TImages.mobileIcon, title: TEnglishTexts.phoneNumber, subTitle: TFormatter.formatPhoneNumber(OrdersController.instance.ordersModel.value.data?.data?[index].pharmacist!.phone ?? '')),
-                  DescriptionItem(image: TImages.locationIcon, title: TEnglishTexts.location, subTitle: "Order No: # 34566"),
+                  DescriptionItem(image: TImages.location, title: TEnglishTexts.location, subTitle: "Order No: # 34566"),
                 ],
               ),
               const Padding(

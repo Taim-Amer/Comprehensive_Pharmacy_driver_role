@@ -20,7 +20,8 @@ class BottomSheetBody extends StatelessWidget {
           child: OrderDetailsView(),
         ),
         TSizes.spaceBtwItems.verticalSpace,
-        BottomSheetFooter(orderID: OrdersController.instance.ordersModel.value.data?.data?[TCacheHelper.getData(key: 'order_id')].id ?? 0)
+        // BottomSheetFooter(orderID: OrdersController.instance.ordersModel.value.data?.data?[TCacheHelper.getData(key: 'order_id')].id ?? 0)
+        BottomSheetFooter(orderID: TCacheHelper.getData(key: 'order_id'))
       ],
     );
   }

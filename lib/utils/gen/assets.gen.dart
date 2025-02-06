@@ -116,6 +116,9 @@ class $AssetsImagesGen {
   /// File path: assets/images/f7_camera-fill.svg
   String get f7CameraFill => 'assets/images/f7_camera-fill.svg';
 
+  /// File path: assets/images/location.svg
+  String get location => 'assets/images/location.svg';
+
   /// List of all assets
   List<String> get values => [
         done,
@@ -129,7 +132,8 @@ class $AssetsImagesGen {
         clipboardExport,
         clipboardText,
         clipboardTick,
-        f7CameraFill
+        f7CameraFill,
+        location
       ];
 }
 

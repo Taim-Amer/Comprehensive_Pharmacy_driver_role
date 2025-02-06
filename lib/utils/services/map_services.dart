@@ -87,9 +87,8 @@ class TMapServices {
       final geometry = data['routes'][0]['geometry'];
       final routePolyline = decodePolyline(geometry);
 
-      // تحديث routeNotifier لجميع الطرق
       routeNotifier.value = [
-        ...routeNotifier.value,  // الاحتفاظ بالطرق السابقة إن وجدت
+        ...routeNotifier.value,
         ...routePolyline.map((point) => LatLng(point[0], point[1])).toList()
       ];
     }

@@ -28,7 +28,7 @@ class Data {
   int? pharmacistId;
   int? driverId;
   String? status;
-  Null? description;
+  String? description;
   String? price;
   String? createdAt;
   String? updatedAt;

@@ -71,12 +71,7 @@ class OrderMap extends StatelessWidget {
                                 TCircularIcon(
                                   icon: Iconsax.notification,
                                   showBorder: true,
-                                  onPressed: () => showOrderDetailsBottomsheet(
-                                    name: "Taim",
-                                    phone: "0997421905",
-                                    distance: 1,
-                                    driverID: 1,
-                                  ),
+                                  onPressed: () => showOrderDetailsBottomsheet(),
                                 ),
                               ],
                             ),

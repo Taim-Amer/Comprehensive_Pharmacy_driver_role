@@ -11,6 +11,7 @@ import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/helper_functions.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/logging/logger.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/services/map_services.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/storage/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:get/get.dart';
@@ -58,7 +59,7 @@ class OrdersController extends GetxController {
     TMapServices.initializeLocation((location) {
       currentLocation.value = location;
       mapController.move(location, 15);
-      _updateRoutes();
+      // _updateRoutes();
     });
     super.onReady();
   }
@@ -82,23 +83,24 @@ class OrdersController extends GetxController {
     pageController.jumpTo(index);
   }
 
-  Future<void> initializePositions() async {
+  Future<void> initializePositions({int? index}) async {
+    print("=============================================");
     final ordersData = ordersModel.value.data?.data;
 
     if (ordersData != null && ordersData.isNotEmpty) {
       initialCustomerPosition.value = LatLng(
-        double.tryParse(ordersData.lastOrNull?.customer?.lat ?? '0') ?? 0.0,
-        double.tryParse(ordersData.lastOrNull?.customer?.lng ?? '0') ?? 0.0,
+        double.tryParse(ordersData[index ?? 0].customer?.lat ?? '0') ?? 0.0,
+        double.tryParse(ordersData[index ?? 0].customer?.lng ?? '0') ?? 0.0,
       );
       initialPharmacyPosition.value = LatLng(
-        double.tryParse(ordersData.lastOrNull?.pharmacist?.lat ?? '0') ?? 0.0,
-        double.tryParse(ordersData.lastOrNull?.pharmacist?.lng ?? '0') ?? 0.0,
+        double.tryParse(ordersData[index ?? 0].pharmacist?.lat ?? '0') ?? 0.0,
+        double.tryParse(ordersData[index ?? 0].pharmacist?.lng ?? '0') ?? 0.0,
       );
     } else {
       initialCustomerPosition.value = const LatLng(0, 0);
       initialPharmacyPosition.value = const LatLng(0, 0);
     }
-    _updateRoutes();
+    // _updateRoutes();
   }
 
   void onPositionChanged(MapCamera position, bool hasGesture) {
@@ -111,10 +113,9 @@ class OrdersController extends GetxController {
     final currentLocation = this.currentLocation.value;
     if (currentLocation == null) return;
 
-    TMapServices.getRoute(currentLocation, initialCustomerPosition.value!);
+    // TMapServices.getRoute(currentLocation, initialCustomerPosition.value!);
 
     TMapServices.getRoute(currentLocation, initialPharmacyPosition.value!);
-
     if (initialCustomerPosition.value != null && initialPharmacyPosition.value != null) {
       TMapServices.getRoute(initialPharmacyPosition.value!, initialCustomerPosition.value!);
     }
@@ -146,6 +147,7 @@ class OrdersController extends GetxController {
     await OrderRepoImpl.instance.getOrders().then((response){
       if(response.status == true){
         ordersModel.value = response;
+        TCacheHelper.saveData(key: 'order_id', value: response.data?.data?.firstOrNull!.id);
         THelperFunctions.updateApiStatus(target: getOrdersApiStatus, value: RequestState.success);
       } else{
         THelperFunctions.updateApiStatus(target: getOrdersApiStatus, value: RequestState.error);

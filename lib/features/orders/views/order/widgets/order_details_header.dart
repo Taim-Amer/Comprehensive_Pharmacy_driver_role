@@ -1,5 +1,6 @@
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/icons/circular_icon.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/controllers/orders_controller.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/storage/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +17,7 @@ class OrderDetailsHeader extends StatelessWidget {
           showBorder: false,
           onPressed: () {
             if (OrdersController.instance.currentPageIndex.value > 0) {
+              // OrdersController.instance.showOrder(orderID: TCacheHelper.getData(key: 'order_id'));
               OrdersController.instance.currentPageIndex.value--;
               OrdersController.instance.pageController.animateToPage(
                 OrdersController.instance.currentPageIndex.value,
@@ -35,8 +37,8 @@ class OrderDetailsHeader extends StatelessWidget {
           icon: Icons.arrow_forward_ios_rounded,
           showBorder: false,
           onPressed: () {
-            if (OrdersController.instance.currentPageIndex.value <
-                (OrdersController.instance.ordersModel.value.data?.data?.length ?? 0)) {
+            if (OrdersController.instance.currentPageIndex.value < (OrdersController.instance.ordersModel.value.data?.data?.length ?? 0)) {
+              // OrdersController.instance.showOrder(orderID: TCacheHelper.getData(key: 'order_id'));
               OrdersController.instance.currentPageIndex.value++;
               OrdersController.instance.pageController.animateToPage(
                 OrdersController.instance.currentPageIndex.value,
