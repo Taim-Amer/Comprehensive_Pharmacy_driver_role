@@ -56,10 +56,17 @@ class OrdersController extends GetxController {
   void onReady() async{
     await getOrders();
     initializePositions();
+    // TMapServices.initializeLocation((location) {
+    //   currentLocation.value = location;
+    //   mapController.move(location, 15);
+    //   // _updateRoutes();
+    // });
     TMapServices.initializeLocation((location) {
       currentLocation.value = location;
-      mapController.move(location, 15);
-      // _updateRoutes();
+      if (!mapMovedManually.value) {
+        mapController.move(location, 15);
+        _updateRoutes();
+      }
     });
     super.onReady();
   }
@@ -84,7 +91,6 @@ class OrdersController extends GetxController {
   }
 
   Future<void> initializePositions({int? index}) async {
-    print("=============================================");
     final ordersData = ordersModel.value.data?.data;
 
     if (ordersData != null && ordersData.isNotEmpty) {
@@ -96,8 +102,6 @@ class OrdersController extends GetxController {
         double.tryParse(ordersData[index ?? 0].pharmacist?.lat ?? '0') ?? 0.0,
         double.tryParse(ordersData[index ?? 0].pharmacist?.lng ?? '0') ?? 0.0,
       );
-      print(initialPharmacyPosition);
-      print(initialCustomerPosition);
     } else {
       initialCustomerPosition.value = const LatLng(0, 0);
       initialPharmacyPosition.value = const LatLng(0, 0);
@@ -111,16 +115,28 @@ class OrdersController extends GetxController {
     }
   }
 
+  // Future<void> _updateRoutes() async {
+  //   final currentLocation = this.currentLocation.value;
+  //   if (currentLocation == null) return;
+  //
+  //   // TMapServices.getRoute(currentLocation, initialCustomerPosition.value!);
+  //
+  //   TMapServices.getRoute(currentLocation, initialPharmacyPosition.value!);
+  //   if (initialCustomerPosition.value != null && initialPharmacyPosition.value != null) {
+  //     TMapServices.getRoute(initialPharmacyPosition.value!, initialCustomerPosition.value!);
+  //   }
+  // }
   Future<void> _updateRoutes() async {
     final currentLocation = this.currentLocation.value;
     if (currentLocation == null) return;
 
-    // TMapServices.getRoute(currentLocation, initialCustomerPosition.value!);
+    TMapServices.routeNotifier.value = [];
 
-    TMapServices.getRoute(currentLocation, initialPharmacyPosition.value!);
-    if (initialCustomerPosition.value != null && initialPharmacyPosition.value != null) {
-      TMapServices.getRoute(initialPharmacyPosition.value!, initialCustomerPosition.value!);
-    }
+    await TMapServices.getRoute(currentLocation, initialPharmacyPosition.value!);
+
+    // if (initialCustomerPosition.value != null && initialPharmacyPosition.value != null) {
+      await TMapServices.getRoute(initialPharmacyPosition.value!, initialCustomerPosition.value!);
+    // }
   }
 
   Future<bool> changeReady() async{
@@ -149,7 +165,7 @@ class OrdersController extends GetxController {
     await OrderRepoImpl.instance.getOrders().then((response){
       if(response.status == true){
         ordersModel.value = response;
-        TCacheHelper.saveData(key: 'order_id', value: response.data?.data?.firstOrNull!.id);
+        // TCacheHelper.saveData(key: 'order_id', value: response.data?.data?.firstOrNull!.id);
         THelperFunctions.updateApiStatus(target: getOrdersApiStatus, value: RequestState.success);
       } else{
         THelperFunctions.updateApiStatus(target: getOrdersApiStatus, value: RequestState.error);

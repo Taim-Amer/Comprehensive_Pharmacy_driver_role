@@ -71,13 +71,61 @@ class TMapServices {
     }
   }
 
-  static Future<void> getRoute(LatLng? source, LatLng destination) async {
-    final currentLocation = source ?? currentLocationNotifier.value;
+  // static Future<void> getRoute(LatLng? source, LatLng destination) async {
+  //   final currentLocation = source ?? currentLocationNotifier.value;
+  //
+  //   if (currentLocation == null || destination == null) return;
+  //
+  //   final url = Uri.parse(
+  //       'http://router.project-osrm.org/route/v1/driving/${currentLocation.longitude},${currentLocation.latitude};${destination.longitude},${destination.latitude}?overview=full&geometries=polyline'
+  //   );
+  //
+  //   final response = await http.get(url);
+  //
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.body);
+  //     final geometry = data['routes'][0]['geometry'];
+  //     final routePolyline = decodePolyline(geometry);
+  //
+  //     routeNotifier.value = [
+  //       ...routeNotifier.value,
+  //       ...routePolyline.map((point) => LatLng(point[0], point[1])).toList()
+  //     ];
+  //   }
+  // }
+  // static Future<void> getRoute(LatLng? source, LatLng destination) async {
+  //   final currentLocation = source ?? currentLocationNotifier.value;
+  //
+  //   if (currentLocation == null || destination == null) return;
+  //
+  //   final url = Uri.parse(
+  //       'http://router.project-osrm.org/route/v1/driving/${currentLocation.longitude},${currentLocation.latitude};${destination.longitude},${destination.latitude}?overview=full&geometries=polyline'
+  //   );
+  //
+  //   final response = await http.get(url);
+  //
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.body);
+  //     final geometry = data['routes'][0]['geometry'];
+  //     final routePolyline = decodePolyline(geometry);
+  //
+  //     // مسح النقاط القديمة قبل إضافة النقاط الجديدة
+  //     routeNotifier.value = routePolyline.map((point) => LatLng(point[0], point[1])).toList();
+  //   }
+  // }
 
-    if (currentLocation == null || destination == null) return;
+  static Future<void> getRoute(LatLng? source, LatLng destination) async {
+    // استخدام الموقع الحالي إن لم يُمرر ضمن المتغير source
+    final currentLocation = source ?? currentLocationNotifier.value;
+    if (currentLocation == null) {
+      print("الموقع الحالي غير متوفر.");
+      return;
+    }
 
     final url = Uri.parse(
-        'http://router.project-osrm.org/route/v1/driving/${currentLocation.longitude},${currentLocation.latitude};${destination.longitude},${destination.latitude}?overview=full&geometries=polyline'
+        'http://router.project-osrm.org/route/v1/driving/'
+            '${currentLocation.longitude},${currentLocation.latitude};'
+            '${destination.longitude},${destination.latitude}?overview=full&geometries=polyline6'
     );
 
     final response = await http.get(url);
@@ -87,36 +135,58 @@ class TMapServices {
       final geometry = data['routes'][0]['geometry'];
       final routePolyline = decodePolyline(geometry);
 
-      routeNotifier.value = [
-        ...routeNotifier.value,
-        ...routePolyline.map((point) => LatLng(point[0], point[1])).toList()
-      ];
-    }
-  }
-
-  static Future<void> getRoute2(LatLng destination) async {
-    final currentLocation = currentLocationNotifier.value;
-    if (currentLocation == null) return;
-
-    final polylinePoints = PolylinePoints();
-    final result = await polylinePoints.getRouteBetweenCoordinates(
-
-      request: PolylineRequest(
-        origin: PointLatLng(currentLocation.latitude, currentLocation.longitude),
-        destination: PointLatLng(destination.latitude, destination.longitude),
-        mode: TravelMode.driving,
-      ),
-    );
-
-    if (result.points.isNotEmpty) {
-      routeNotifier.value = result.points
-          .map((point) => LatLng(point.latitude, point.longitude))
+      // تحويل النقاط إلى قائمة من LatLng
+      final newRoutePoints = routePolyline
+          .map((point) => LatLng(point[0], point[1]))
           .toList();
+
+      // هنا نقوم بتعيين القائمة الجديدة فقط دون دمجها مع القائمة السابقة
+      routeNotifier.value = newRoutePoints;
+      routeNotifier.notifyListeners();
+
+      print("تم تحديث بيانات المسار: $newRoutePoints");
+    } else {
+      print("خطأ في الحصول على المسار: ${response.statusCode} - ${response.body}");
     }
   }
+
+  // static List<List<double>> decodePolyline(String polyline) {
+  //   const factor = 1e5;
+  //   List<List<double>> points = [];
+  //   int index = 0;
+  //   int len = polyline.length;
+  //   int lat = 0;
+  //   int lon = 0;
+  //
+  //   while (index < len) {
+  //     int shift = 0;
+  //     int result = 0;
+  //     int byte;
+  //     do {
+  //       byte = polyline.codeUnitAt(index++) - 63;
+  //       result |= (byte & 0x1f) << shift;
+  //       shift += 5;
+  //     } while (byte >= 0x20);
+  //     int dlat = (result & 1) != 0 ? ~(result >> 1) : result >> 1;
+  //     lat += dlat;
+  //     shift = 0;
+  //     result = 0;
+  //
+  //     do {
+  //       byte = polyline.codeUnitAt(index++) - 63;
+  //       result |= (byte & 0x1f) << shift;
+  //       shift += 5;
+  //     } while (byte >= 0x20);
+  //
+  //     int dlng = (result & 1) != 0 ? ~(result >> 1) : result >> 1;
+  //     lon += dlng;
+  //     points.add([lat / factor, lon / factor]);
+  //   }
+  //   return points;
+  // }
 
   static List<List<double>> decodePolyline(String polyline) {
-    const factor = 1e5;
+    const factor = 1e6; // تعديل عامل التقسيم للدقة الأعلى
     List<List<double>> points = [];
     int index = 0;
     int len = polyline.length;
@@ -136,13 +206,11 @@ class TMapServices {
       lat += dlat;
       shift = 0;
       result = 0;
-
       do {
         byte = polyline.codeUnitAt(index++) - 63;
         result |= (byte & 0x1f) << shift;
         shift += 5;
       } while (byte >= 0x20);
-
       int dlng = (result & 1) != 0 ? ~(result >> 1) : result >> 1;
       lon += dlng;
       points.add([lat / factor, lon / factor]);

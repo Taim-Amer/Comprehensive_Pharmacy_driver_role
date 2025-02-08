@@ -5,6 +5,7 @@ import 'package:comprehensive_pharmacy_driver_role/utils/constants/image_strings
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/formatters/formatter.dart';
+import 'package:comprehensive_pharmacy_driver_role/utils/storage/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,12 +20,9 @@ class OrderDetailsView extends StatelessWidget {
       onPageChanged: (index){
         OrdersController.instance.currentPageIndex.value = index;
         OrdersController.instance.initializePositions(index: index);
+        TCacheHelper.saveData(key: 'order_id', value: OrdersController.instance.ordersModel.value.data?.data![index].id);
       },
       itemBuilder: (context, index){
-        // TCacheHelper.saveData(key: 'order_id', value: OrdersController.instance.ordersModel.value.data?.data?.firstOrNull!.id);
-        // print(OrdersController.instance.orderDetailsModel.value.data!.id);
-        // print(OrdersController.instance.orderDetailsModel.value.data!.id);
-        // print(OrdersController.instance.orderDetailsModel.value.data!.id);
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
