@@ -65,7 +65,7 @@ class OrdersController extends GetxController {
       currentLocation.value = location;
       if (!mapMovedManually.value) {
         mapController.move(location, 15);
-        _updateRoutes();
+        updateRoutes();
       }
     });
     super.onReady();
@@ -126,7 +126,7 @@ class OrdersController extends GetxController {
   //     TMapServices.getRoute(initialPharmacyPosition.value!, initialCustomerPosition.value!);
   //   }
   // }
-  Future<void> _updateRoutes() async {
+  Future<void> updateRoutes() async {
     final currentLocation = this.currentLocation.value;
     if (currentLocation == null) return;
 

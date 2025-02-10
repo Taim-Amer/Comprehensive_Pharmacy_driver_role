@@ -67,7 +67,7 @@ class _LocationMapState extends State<LocationMap> {
                   ),
                   children: [
                     TileLayer(
-                      urlTemplate: dark ? TApiConstants.darkMap : TApiConstants.lightMap,
+                      urlTemplate: dark ? TApiConstants.lightMap : TApiConstants.lightMap,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(TSizes.defaultSpace),

@@ -21,6 +21,7 @@ class OrderDetailsView extends StatelessWidget {
         OrdersController.instance.currentPageIndex.value = index;
         OrdersController.instance.initializePositions(index: index);
         TCacheHelper.saveData(key: 'order_id', value: OrdersController.instance.ordersModel.value.data?.data![index].id);
+        OrdersController.instance.onInit();
       },
       itemBuilder: (context, index){
         return Padding(
