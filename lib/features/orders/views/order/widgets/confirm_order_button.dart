@@ -1,3 +1,4 @@
+import 'package:comprehensive_pharmacy_driver_role/localization/keys.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,7 @@ class ConfirmOrderButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {},
-        child: Text(TEnglishTexts.confirmOrder),
+        child: Text(TranslationKey.kConfirmOrder),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/personalization/views/settings/widgets/language_radio_tile.dart';
+import 'package:comprehensive_pharmacy_driver_role/localization/keys.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/colors.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/enums.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
@@ -26,12 +27,12 @@ class SelectLanguagesContainer extends StatelessWidget {
         children: [
           LanguageRadioTile(
             language: Language.english,
-            languageName: TEnglishTexts.english,
+            languageName: TranslationKey.kEnglish,
             valueNotifier: selectedLanguageNotifier,
           ),
           LanguageRadioTile(
             language: Language.arabic,
-            languageName: TEnglishTexts.arabic,
+            languageName: TranslationKey.kArabic,
             valueNotifier: selectedLanguageNotifier,
           ),
         ],

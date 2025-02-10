@@ -1,5 +1,6 @@
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/controllers/orders_controller.dart';
+import 'package:comprehensive_pharmacy_driver_role/localization/keys.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/colors.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
@@ -29,7 +30,7 @@ class OrdersHeader extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  TEnglishTexts.readyToReceiveTitle,
+                  TranslationKey.kReadyToReceiveTitle,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     color: dark ? TColors.light : const Color(0xFF383838),
                   ),
@@ -45,7 +46,7 @@ class OrdersHeader extends StatelessWidget {
           ),
           Expanded(
             child: Text(
-              TEnglishTexts.readyToReceiveSubTitle,
+              TranslationKey.kReadyToReceiveSubTitle,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(color: const Color(0xFF707070)),
             ),
           ),

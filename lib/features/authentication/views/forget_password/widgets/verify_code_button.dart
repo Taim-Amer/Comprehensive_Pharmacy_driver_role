@@ -17,7 +17,7 @@ class VerifyCodeButton extends StatelessWidget {
       height: 50.h,
       child: ElevatedButton(
         onPressed: () => ForgetPasswordController.instance.forgetVerify(),
-        child: Text(TranslationKey.kTcontinue),
+        child: Text(TranslationKey.kContinue),
       ),
     ));
   }

@@ -1,7 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/appbar/appbar.dart';
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/current_marker.dart';
+
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/map/road.dart';
+import 'package:comprehensive_pharmacy_driver_role/localization/keys.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/api_constants.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/exports.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/services/map_services.dart';
@@ -79,7 +81,7 @@ class _LocationMapState extends State<LocationMap> {
                             cursorColor: TColors.primary,
                             onFieldSubmitted: (value) => _searchLocation(),
                             decoration: InputDecoration(
-                              hintText: TEnglishTexts.addressEnter,
+                              hintText: TranslationKey.kAddressEnter,
                               prefixIcon: const Icon(Iconsax.location),
                             ),
                           ),
@@ -87,7 +89,7 @@ class _LocationMapState extends State<LocationMap> {
                           SizedBox(
                             height: 50.h,
                             width: double.infinity,
-                            child: ElevatedButton(onPressed: () => Get.back(), child: Text(TEnglishTexts.tcontinue)),
+                            child: ElevatedButton(onPressed: () => Get.back(), child: Text(TranslationKey.kContinue)),
                           )
                         ],
                       ),

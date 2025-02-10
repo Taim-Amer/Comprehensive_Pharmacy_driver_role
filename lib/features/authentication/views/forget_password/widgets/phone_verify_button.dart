@@ -21,7 +21,7 @@ class PhoneVerifyButton extends StatelessWidget {
           TDeviceUtils.hideKeyboard(context);
           ForgetPasswordController.instance.forgetPassword();
         },
-        child: Text(TranslationKey.kTcontinue),
+        child: Text(TranslationKey.kContinue),
       ),
     ));
   }

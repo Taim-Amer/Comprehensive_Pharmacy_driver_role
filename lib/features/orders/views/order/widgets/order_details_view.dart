@@ -1,6 +1,7 @@
 import 'package:comprehensive_pharmacy_driver_role/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/controllers/orders_controller.dart';
 import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/widgets/description_item.dart';
+import 'package:comprehensive_pharmacy_driver_role/localization/keys.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/image_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
@@ -36,8 +37,8 @@ class OrderDetailsView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DescriptionItem(image: TImages.pharmaIcon, title: TEnglishTexts.pharmacyName, subTitle: OrdersController.instance.ordersModel.value.data?.data?[index].pharmacist!.pharmacy!.pharmacyName ?? ''),
-                  DescriptionItem(image: TImages.calenderIcon, title: TEnglishTexts.orderDate, subTitle: TFormatter.formatDate(OrdersController.instance.ordersModel.value.data?.data?[index].createdAt ?? '')),
+                  DescriptionItem(image: TImages.pharmaIcon, title: TranslationKey.kPharmacyName, subTitle: OrdersController.instance.ordersModel.value.data?.data?[index].pharmacist!.pharmacy!.pharmacyName ?? ''),
+                  DescriptionItem(image: TImages.calenderIcon, title: TranslationKey.kOrderDate, subTitle: TFormatter.formatDate(OrdersController.instance.ordersModel.value.data?.data?[index].createdAt ?? '')),
                 ],
               ),
               const Padding(
@@ -47,15 +48,15 @@ class OrderDetailsView extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  DescriptionItem(image: TImages.mobileIcon, title: TEnglishTexts.phoneNumber, subTitle: TFormatter.formatPhoneNumber(OrdersController.instance.ordersModel.value.data?.data?[index].pharmacist!.phone ?? '')),
-                  DescriptionItem(image: TImages.location, title: TEnglishTexts.location, subTitle: "Order No: # 34566"),
+                  DescriptionItem(image: TImages.mobileIcon, title: TranslationKey.kPhoneNumber, subTitle: TFormatter.formatPhoneNumber(OrdersController.instance.ordersModel.value.data?.data?[index].pharmacist!.phone ?? '')),
+                  DescriptionItem(image: TImages.location, title: TranslationKey.kLocation, subTitle: "Order No: # 34566"),
                 ],
               ),
               const Padding(
                 padding: EdgeInsets.all(10.0),
                 child: TRoundedContainer(width: double.infinity, height: 1, backgroundColor: Color(0xFFE7E7E7)),
               ),
-              DescriptionItem(image: TImages.noteIcon, title: TEnglishTexts.note, subTitle: "Order No: # 34566", showDes: false),
+              DescriptionItem(image: TImages.noteIcon, title: TranslationKey.kNote, subTitle: "Order No: # 34566", showDes: false),
               TSizes.spaceBtwItems.verticalSpace,
               Expanded(
                 child: TRoundedContainer(

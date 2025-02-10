@@ -11,7 +11,7 @@ class VerifyCodeFooter extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Text(TranslationKey.kCheckPhoneQuestion),
+          Text(TranslationKey.kCheckPhoneQuastion),
           TextButton(
             onPressed: () => ForgetPasswordController.instance.resend(),
             child: Text(TranslationKey.kResend),

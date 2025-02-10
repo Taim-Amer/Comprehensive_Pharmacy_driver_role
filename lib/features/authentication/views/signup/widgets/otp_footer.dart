@@ -10,7 +10,7 @@ class OtpFooter extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Text(TranslationKey.kOtpQuestion),
+          Text(TranslationKey.kOtpQuastion),
           TextButton(onPressed: (){}, child: Text(TranslationKey.kResend))
         ],
       ),

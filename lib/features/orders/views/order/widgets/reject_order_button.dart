@@ -1,3 +1,4 @@
+import 'package:comprehensive_pharmacy_driver_role/localization/keys.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +13,7 @@ class RejectOrderButton extends StatelessWidget {
       width: double.infinity,
       child: OutlinedButton(
         onPressed: () {},
-        child: Text(TEnglishTexts.rejectOrder),
+        child: Text(TranslationKey.kRejectOrder),
       ),
     );
   }

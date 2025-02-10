@@ -12,7 +12,7 @@ class SigninFooter extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(TranslationKey.kSignupQuestion),
+        Text(TranslationKey.kSignupQuastion),
         TextButton(
           onPressed: () => Get.toNamed(AppRoutes.signup),
           child: Text(TranslationKey.kRegister),

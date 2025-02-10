@@ -22,11 +22,11 @@ class SignupForm extends StatelessWidget {
         children: [
           TextFormField(
             controller: SignupController.instance.driverNameController,
-            validator: (value) => TValidator.validateEmptyText(" ${TEnglishTexts.driverName}", value),
+            validator: (value) => TValidator.validateEmptyText(" ${TranslationKey.kDriverName}", value),
             enableInteractiveSelection: false,
             cursorColor: TColors.primary,
             decoration: InputDecoration(
-              hintText: TEnglishTexts.driverName,
+              hintText: TranslationKey.kDriverName,
               prefixIcon: const Icon(Iconsax.user),
             ),
           ),
@@ -75,7 +75,7 @@ class SignupForm extends StatelessWidget {
             onTap: () => Get.to(() => const LocationMap(), transition: Transition.rightToLeft),
             cursorColor: TColors.primary,
             decoration: InputDecoration(
-                hintText: TEnglishTexts.location,
+                hintText: TranslationKey.kLocation,
                 prefixIcon: const Icon(Iconsax.location),
                 suffixIcon: const Icon(Icons.keyboard_arrow_right_outlined, size: 22,)
             ),
