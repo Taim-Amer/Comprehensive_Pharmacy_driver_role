@@ -100,7 +100,7 @@ class OrdersController extends GetxController {
       initialCustomerPosition.value = const LatLng(0, 0);
       initialPharmacyPosition.value = const LatLng(0, 0);
     }
-    // _updateRoutes();
+    updateRoutes();
   }
 
   void onPositionChanged(MapCamera position, bool hasGesture) {

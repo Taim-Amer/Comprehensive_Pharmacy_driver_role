@@ -4,7 +4,6 @@ import 'package:comprehensive_pharmacy_driver_role/features/orders/views/order/w
 import 'package:comprehensive_pharmacy_driver_role/localization/keys.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/image_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/constants/sizes.dart';
-import 'package:comprehensive_pharmacy_driver_role/utils/constants/text_strings.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/formatters/formatter.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/storage/cache_helper.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,7 @@ class OrderDetailsView extends StatelessWidget {
         OrdersController.instance.currentPageIndex.value = index;
         OrdersController.instance.initializePositions(index: index);
         TCacheHelper.saveData(key: 'order_id', value: OrdersController.instance.ordersModel.value.data?.data![index].id);
-        OrdersController.instance.onInit();
+        OrdersController.instance.updateRoutes();
       },
       itemBuilder: (context, index){
         return Padding(
@@ -74,3 +73,4 @@ class OrderDetailsView extends StatelessWidget {
     );
   }
 }
+

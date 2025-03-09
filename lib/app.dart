@@ -1,4 +1,5 @@
 import 'package:comprehensive_pharmacy_driver_role/dependencies/order_binding.dart';
+import 'package:comprehensive_pharmacy_driver_role/features/personalization/controllers/settings_controller.dart';
 import 'package:comprehensive_pharmacy_driver_role/localization/translations.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/helpers/helper_functions.dart';
 import 'package:comprehensive_pharmacy_driver_role/utils/router/app_router.dart';
@@ -13,6 +14,7 @@ class PharmacyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put<SettingsController>(SettingsController());
     print(TCacheHelper.getData(key: 'token'));
     return ScreenUtilInit(
       designSize: Size(THelperFunctions.screenWidth(context), THelperFunctions.screenHeight(context)),

@@ -29,7 +29,7 @@ class OrderMap extends StatelessWidget {
       final routes = TMapServices.routeNotifier.value;
       return OrdersController.instance.getOrdersApiStatus.value != RequestState.success ? const Scaffold(appBar: TAppBar(), body: Center(child: CircularProgressIndicator(color: TColors.primary)),) : Scaffold(
         drawer: const GeneralDrawer(),
-        floatingActionButton: FloatingActionButton(onPressed: () => OrdersController.instance.onInit()),
+        floatingActionButton: FloatingActionButton(onPressed: () => OrdersController.instance.updateRoutes(), child: const Icon(Iconsax.eye),),
         body: Column(
           children: [
             Expanded(
