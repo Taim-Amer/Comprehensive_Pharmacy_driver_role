@@ -18,3 +18,4 @@ class TShadowStyle {
     offset: const Offset(0, 2),
   );
 }
+
